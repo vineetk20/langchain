@@ -99,6 +99,7 @@ class LLMChain(Chain):
     ) -> LLMResult:
         """Generate LLM result from inputs."""
         prompts, stop = self.prep_prompts(input_list, run_manager=run_manager)
+        self.llm_kwargs.update({'metadata':input_list[0]['metadata']})
         return self.llm.generate_prompt(
             prompts,
             stop,
